@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santi Styles | Barbershop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="https://www.instagram.com/santi.styles/" target="_blank" class="nav-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" viewBox="0 0 448 512">
+                    <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+                </svg>
+            </a>
+            
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/booking">BOOK NOW</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Boost Your Confidence <br> With <br> Santi Styles</h1>
+            <p>Welcome to <strong>@Santi.styles</strong>, where traditional trims meets modern style. Whether you’re looking for a sharp fade, a classic taper, maybe with an on point design, Santi.Styles assures to have you covered.</p>
+            <a href="/booking" class="cta-button">BOOK NOW</a>
+        </section>
+
+        <hr>
+
+        <section class="services">
+            <h3>Our Featured Services</h3>
+            <ul class="services-list">
+                <li>
+                    <strong>Haircut + Fade ($30)</strong>
+                    <span>A sharp fade or taper with a precision top cut.</span>
+                </li>
+                <li>
+                    <strong>Haircut + Fade + Design ($35)</strong>
+                    <span>Haircut + Fade with an on-point custom design.</span>
+                </li>
+                <li>
+                    <strong>Buzz Cut ($25)</strong>
+                    <span>A clean, one-length clipper cut all over with a faded neck.</span>
+                </li>
+                <li>
+                    <strong>Kids Haircuts ($20)</strong>
+                    <span>Sharp styles for the young rascals (Ages 0-11).</span>
+                </li>
+            </ul>
+        </section>
+
+        <section id="booking">
+            <h3>Book Now</h3>
+            <p>We value your time. Skip the wait and secure your spot with our online booking system.</p>
+            <a href="/booking" class="cta-button">Select a Time</a>
+        </section>
+
+        <hr>
+
+        <section class="reviews">
+            <div class="reviews-header">
+                <h3>Customer Reviews</h3>
+                <button class="cta-button" id="leave-review-btn">Leave a Review</button>
+            </div>
+            <div class="reviews-container" id="reviews-container">
+                {% for review in reviews %}
+                <div class="review-card">
+                    <div class="review-header">
+                        <strong>{{ review.name }}</strong>
+                        <span class="stars">{% for i in range(review.rating) %}★{% endfor %}</span>
+                    </div>
+                    <p>"{{ review.message }}"</p>
+                    <a href="{{ url_for('delete_review', id=review.id) }}" 
+                       style="color: #ff4d4d; font-size: 0.8rem; text-decoration: none;"
+                       onclick="return confirm('Permanently delete this review from the database?')">Delete Review</a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <div id="review-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Leave a Review</h2>
+                <form id="review-form">
+                    <div class="form-group">
+                        <label for="review-name">Your Name:</label>
+                        <input type="text" id="review-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-rating">Rating:</label>
+                        <div class="rating-input">
+                            <input type="radio" name="rating" value="5" id="star5"><label for="star5">★★★★★</label>
+                            <input type="radio" name="rating" value="4" id="star4"><label for="star4">★★★★</label>
+                            <input type="radio" name="rating" value="3" id="star3"><label for="star3">★★★</label>
+                            <input type="radio" name="rating" value="2" id="star2"><label for="star2">★★</label>
+                            <input type="radio" name="rating" value="1" id="star1"><label for="star1">★</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-message">Your Review:</label>
+                        <textarea id="review-message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 67 Santi Styles. All rights reserved.</p>
+    </footer>
+
+    <script>
+      const header = document.querySelector('header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+
+      const modal = document.getElementById('review-modal');
+      const leaveReviewBtn = document.getElementById('leave-review-btn');
+      const closeBtn = document.querySelector('.close');
+      const reviewForm = document.getElementById('review-form');
+
+      if(leaveReviewBtn) {
+          leaveReviewBtn.addEventListener('click', () => {
+            modal.style.display = 'block';
+          });
+      }
+
+      closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+
+      window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+
+      reviewForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('review-name').value;
+        const rating = document.querySelector('input[name="rating"]:checked').value;
+        const message = document.getElementById('review-message').value;
+
+        try {
+          const response = await fetch('/add-review', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, rating, message })
+          });
+
+          if (response.ok) {
+            location.reload(); 
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      });
+    </script>
+</body>
+</html>
