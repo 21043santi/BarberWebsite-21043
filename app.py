@@ -4,6 +4,7 @@ from datetime import datetime
 import os
 
 app = Flask(__name__)
+# testing the changes
 
 # Database Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
