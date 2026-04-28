@@ -34,7 +34,7 @@
         <hr>
 
         <section class="services">
-            <h3> Featured Services</h3>
+            <h3>Our Featured Services</h3>
             <ul class="services-list">
                 <li>
                     <strong>Haircut + Fade ($30)</strong>
@@ -150,9 +150,19 @@
 
       reviewForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        
         const name = document.getElementById('review-name').value;
-        const rating = document.querySelector('input[name="rating"]:checked').value;
         const message = document.getElementById('review-message').value;
+
+        // NEW: Check if a star is clicked before submitting
+        const ratingElement = document.querySelector('input[name="rating"]:checked');
+        
+        if (!ratingElement) {
+            alert("Please select a star rating!");
+            return;
+        }
+
+        const rating = ratingElement.value;
 
         try {
           const response = await fetch('/add-review', {
