@@ -49,7 +49,7 @@ def contact():
 @app.route('/booking', methods=['GET', 'POST'])
 def booking():
     if request.method == 'POST':
-        # Takes the JSON data from the Javascript popup logic and saves it
+        # Takes the JSON data from the Javascript popup logic and sassssves it
         data = request.json
         new_booking = Booking(
             name=data.get('name'),
