@@ -2,53 +2,104 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Now | Santi Styles</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
-        .booking-hero {
-            background: linear-gradient(rgba(46, 61, 129, 0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=1000') center/cover;
-            padding: 120px 20px 60px;
-            text-align: center;
-            border-radius: 8px;
-            margin-bottom: 40px;
+        /* Specific tweaks for the booking page, Seperating the Css to follow through with this page only*/ma
+        .booking-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 700px;
+            margin: -40px auto 40px auto; /* Pulls it up slightly over the hero */
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
-        .modern-input {
+
+        .flex-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .flex-row .form-group {
+            flex: 1;
+        }
+
+        select {
             width: 100%;
-            padding: 12px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid #3993dd;
-            border-radius: 4px;
-            color: white;
-            margin-bottom: 15px;
-            font-size: 1rem;
-        }
-        .modern-input:focus {
-            outline: none;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-color: white;
-            box-shadow: 0 0 8px rgba(57, 147, 221, 0.5);
-        }
-        select.modern-input option {
-            background-color: #1a1a1a; 
-            color: white;
-        }
-        .terms-box {
-            background: rgba(0,0,0,0.3);
             padding: 15px;
-            border-radius: 4px;
-            border-left: 3px solid #3993dd;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            text-align: left;
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--accent-white);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            appearance: none;
+            cursor: pointer;
         }
+
+        select:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            background-color: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 10px rgba(57, 147, 221, 0.2);
+        }
+
+        select option {
+            background-color: var(--dark-charcoal);
+            color: white;
+            padding: 10px;
+        }
+
+        select option:disabled {
+            color: #ef4444;
+            background-color: rgba(239, 68, 68, 0.1);
+            font-style: italic;
+        }
+
+        .terms-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-gold);
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+
         .terms-box ul {
-            margin: 5px 0 0 20px;
+            margin: 10px 0 0 20px;
             padding: 0;
-            color: #ccc;
+            color: #94a3b8;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .checkbox-group input {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary-gold);
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            color: #94a3b8;
+            cursor: pointer;
+            margin: 0;
+            font-size: 0.95rem;
         }
     </style>
 </head>
 <body>
+
     <header>
         <nav>
             <a href="https://www.instagram.com/santi.styles/" target="_blank" class="nav-logo">
@@ -56,7 +107,6 @@
                     <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
                 </svg>
             </a>
-            
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/contact">Contact</a></li>
@@ -65,41 +115,51 @@
         </nav>
     </header>
 
-    <main>
+    <main style="max-width: 1000px; padding-bottom: 40px;">
         <section class="hero1">
-            <h1>Book Your Session</h1>
+            <h1 style="font-size: 2.5rem;">Secure Your Chair</h1>
+            <p style="margin-bottom: 0;">Select your service, date, and time below.</p>
         </section>
 
-        <section style="background: rgba(57, 147, 221, 0.15); border: 2px solid #3993dd; padding: 40px; border-radius: 8px; max-width: 600px; margin: 0 auto;">
+        <section class="booking-section">
             <form id="booking-form">
                 
-                <label style="display:block; color:#3993dd; margin-bottom:5px; font-weight: bold;">Full Name</label>
-                <input type="text" name="name" class="modern-input" required>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" required placeholder="How should we address you?">
+                </div>
 
-                <label style="display:block; color:#3993dd; margin-bottom:5px; font-weight: bold;">Email</label>
-                <input type="email" name="email" class="modern-input" required>
-
-                <label style="display:block; color:#3993dd; margin-bottom:5px; font-weight: bold;">Phone</label>
-                <input type="tel" name="phone" class="modern-input" required>
-
-                <label style="display:block; color:#3993dd; margin-bottom:5px; font-weight: bold;">Service & Price</label>
-                <select name="service" id="service-select" class="modern-input" required>
-                    <option value="" disabled selected>Select a service</option>
-                    <option value="Haircut + Fade ($30)">Haircut + Fade - $30</option>
-                    <option value="Haircut + Fade + Design ($35)">Haircut + Fade + Design - $35</option>
-                    <option value="Buzz Cut ($25)">Buzz Cut - $25</option>
-                    <option value="Kids Haircut ($20)">Kids Haircut - $20</option>
-                </select>
-
-                <div style="display: flex; gap: 15px;">
-                    <div style="flex: 1;">
-                        <label style="display:block; color:#3993dd; margin-bottom:5px; font-weight: bold;">Date</label>
-                        <input type="date" name="date" id="booking-date" class="modern-input" required>
+                <div class="flex-row">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" name="email" required placeholder="email@example.com" style="width: 100%; padding: 15px; background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: var(--accent-white); font-family: inherit; font-size: 1rem; transition: all 0.3s ease;">
                     </div>
-                    <div style="flex: 1;">
-                        <label style="display:block; color:#3993dd; margin-bottom:5px; font-weight: bold;">Time (45-min slots)</label>
-                        <select name="time" class="modern-input" required>
-                            <option value="" disabled selected>Select a time</option>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" name="phone" required placeholder="(123) 456-7890" style="width: 100%; padding: 15px; background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: var(--accent-white); font-family: inherit; font-size: 1rem; transition: all 0.3s ease;">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Service & Price</label>
+                    <select name="service" id="service-select" required>
+                        <option value="" disabled selected>Select a service</option>
+                        <option value="Haircut + Fade ($30)">Haircut + Fade - $30</option>
+                        <option value="Haircut + Fade + Design ($35)">Haircut + Fade + Design - $35</option>
+                        <option value="Buzz Cut ($25)">Buzz Cut - $25</option>
+                        <option value="Kids Haircut ($20)">Kids Haircut - $20</option>
+                    </select>
+                </div>
+
+                <div class="flex-row">
+                    <div class="form-group">
+                        <label>Select Date</label>
+                        <input type="date" name="date" id="booking-date" required style="width: 100%; padding: 15px; background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: var(--accent-white); font-family: inherit; font-size: 1rem; transition: all 0.3s ease; color-scheme: dark;">
+                    </div>
+                    <div class="form-group">
+                        <label>Select Time (45-min slots)</label>
+                        <select name="time" id="booking-time" required disabled>
+                            <option value="" disabled selected>Select Date First</option>
                             <option value="09:00 AM">09:00 AM</option>
                             <option value="09:45 AM">09:45 AM</option>
                             <option value="10:30 AM">10:30 AM</option>
@@ -116,33 +176,36 @@
                 </div>
 
                 <div class="terms-box">
-                    <strong style="color: #3993dd;">Terms & Conditions:</strong>
+                    <strong style="color: var(--primary-gold);">Terms & Conditions:</strong>
                     <ul>
                         <li>A <strong>$5 fee</strong> applies for late cancellations or no-shows.</li>
-                        <li>The shop address will be sent to you once your booking is confirmed.</li>
+                        <li>The exact shop address will be provided once your booking is confirmed.</li>
                     </ul>
                 </div>
 
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-                    <input type="checkbox" required id="terms" style="width: auto; margin: 0; cursor: pointer;">
-                    <label for="terms" style="margin: 0; font-size: 0.9rem; color: #ccc; cursor: pointer;">I agree to the terms & conditions</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" required id="terms">
+                    <label for="terms">I agree to the terms & conditions</label>
                 </div>
 
-                <button type="submit" class="cta-button" style="width: 100%;">Confirm Booking</button>
+                <button type="submit" class="cta-button" style="width: 100%; text-align: center;">Confirm Booking</button>
             </form>
         </section>
     </main>
 
-    <div id="success-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; padding: 20px;">
-        <div style="background: #1a1a1a; border: 2px solid #3993dd; padding: 40px; border-radius: 8px; text-align: center; max-width: 450px; width: 100%; box-shadow: 0 0 20px rgba(57, 147, 221, 0.3);">
-            <h2 style="color: #3993dd; margin-top: 0; font-size: 2rem;">You're All Set!</h2>
-            <p style="color: white; font-size: 1.1rem; line-height: 1.5;">Your booking for the <strong style="color: #3993dd;" id="popup-service"></strong> has been received.</p>
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #00ff66;">
-                <p style="color: white; font-size: 1.2rem; margin: 0;">Total Amount Due: <strong style="color: #00ff66; font-size: 1.5rem;" id="popup-price"></strong></p>
-                <p style="color: #ff4d4d; font-size: 0.9rem; margin: 5px 0 0 0; text-transform: uppercase; font-weight: bold;">(Please Bring Cash)</p>
+    <div id="success-modal" class="modal">
+        <div class="modal-content" style="text-align: center; border-top: 4px solid #22c55e;">
+            <h2 style="color: #22c55e; margin-top: 0; font-size: 2.2rem; font-weight: 800;">You're All Set!</h2>
+            <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.6;">Your booking for the <strong style="color: var(--accent-white);" id="popup-service"></strong> has been secured.</p>
+            
+            <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 8px; margin: 25px 0; border: 1px solid rgba(255,255,255,0.05);">
+                <p style="color: #94a3b8; font-size: 1rem; margin: 0 0 5px 0;">Total Amount Due</p>
+                <p style="color: #22c55e; font-size: 2.5rem; font-weight: 800; margin: 0;" id="popup-price"></p>
+                <p style="color: #ef4444; font-size: 0.85rem; margin: 10px 0 0 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">(Please Bring Cash)</p>
             </div>
-            <p style="color: #ccc; font-size: 0.9rem; margin-bottom: 30px;">You will be emailed shortly with the shop address and appointment details.</p>
-            <button type="button" id="got-it-btn" class="cta-button" style="width: 100%;">Got it!</button>
+            
+            <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 30px;">Keep an eye on your email or phone for confirmation details.</p>
+            <button type="button" id="got-it-btn" class="cta-button" style="width: 100%;">Return Home</button>
         </div>
     </div>
 
@@ -157,13 +220,48 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Lock calendar to 2 days in advance
+            // Lock calendar to 2 days in advance minimum
             const dateInput = document.getElementById('booking-date');
             const today = new Date();
             today.setDate(today.getDate() + 2);
             dateInput.min = today.toISOString().split('T')[0];
         });
 
+        // Backend talk: Check for booked times when a date is selected
+        document.getElementById('booking-date').addEventListener('change', async function(e) {
+            const selectedDate = e.target.value;
+            const timeSelect = document.getElementById('booking-time');
+            
+            timeSelect.disabled = false;
+            timeSelect.options[0].text = "Select a time";
+
+            // Reset all options
+            Array.from(timeSelect.options).forEach(opt => {
+                if (opt.value !== "") {
+                    opt.disabled = false;
+                    opt.text = opt.value;
+                }
+            });
+
+            if (!selectedDate) return;
+
+            try {
+                const response = await fetch(`/api/booked-slots?date=${selectedDate}`);
+                const bookedTimes = await response.json();
+
+                // Disable taken times
+                Array.from(timeSelect.options).forEach(opt => {
+                    if (bookedTimes.includes(opt.value)) {
+                        opt.disabled = true;
+                        opt.text = `${opt.value} (Unavailable)`;
+                    }
+                });
+            } catch (error) {
+                console.error('Error fetching booked slots:', error);
+            }
+        });
+
+        // Submit Booking
         document.getElementById('booking-form').addEventListener('submit', async function(e) {
             e.preventDefault(); 
             
@@ -182,8 +280,10 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
+                
+                const result = await response.json();
 
-                if (response.ok) {
+                if (response.ok && result.status === 'success') {
                     const serviceFull = data.service;
                     const match = serviceFull.match(/\(\$(\d+)\)/);
                     const price = match ? "$" + match[1] : "TBD";
@@ -192,7 +292,10 @@
                     document.getElementById('popup-service').innerText = serviceName;
                     document.getElementById('popup-price').innerText = price;
                     
-                    document.getElementById('success-modal').style.display = 'flex';
+                    document.getElementById('success-modal').style.display = 'block';
+                } else {
+                    alert(result.message || "An error occurred while booking.");
+                    document.getElementById('booking-date').dispatchEvent(new Event('change')); 
                 }
             } catch (error) {
                 console.error('Database Error:', error);
