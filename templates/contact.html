@@ -3,8 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Santi Styles | Barbershop</title>
+    <title>Santi Styles | Contact</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Shared premium layout matching the booking page */
+        .booking-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 700px;
+            margin: -40px auto 40px auto; 
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 25px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(57, 147, 221, 0.3);
+        }
+
+        .info-card h4 {
+            color: var(--primary-gold);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-card p {
+            color: #cbd5e1;
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Modern Inputs for Email and Textarea */
+        .modern-input {
+            width: 100%;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--accent-white);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .modern-input:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            background-color: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 10px rgba(57, 147, 221, 0.2);
+        }
+
+        textarea.modern-input {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .section-divider {
+            border: 0;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 30px 0;
+        }
+    </style>
 </head>
 <body>
 
@@ -24,42 +107,52 @@
         </nav>
     </header>
 
-    <main>
+    <main style="max-width: 1000px; padding-bottom: 40px;">
         <section class="hero1">
-            <h1>Get in touch</h1>
- 
+            <h1 style="font-size: 2.5rem;">Get in Touch</h1>
+            <p style="margin-bottom: 0;">Have a question? We'd love to hear from you.</p>
         </section>
 
-        <hr>
+        <section class="booking-section">
+            
+            <!-- Contact Info Grid -->
+            <div class="contact-info-grid">
+                <div class="info-card">
+                    <h4>Phone</h4>
+                    <p>+64 21 024 56 837<br>021 024 56837</p>
+                </div>
+                <div class="info-card">
+                    <h4>Email</h4>
+                    <p>santifalla09@gmail.com</p>
+                </div>
+                <div class="info-card">
+                    <h4>Hours</h4>
+                    <p>Mon - Fri: 4PM - 9PM<br>Sat: 10AM - 6PM<br>Sun: Closed</p>
+                </div>
+            </div>
 
-        <section>
-            <h3>Contact Information</h3>
-            <p><strong>Phone:</strong> 64+ 21 024 56 837 / 021 024 56837</p>
-            <p><strong>Email:</strong> santifalla09@gmail.com</p>
-            <p><strong>Hours:</strong><br>
-            Monday - Friday: 4:00 PM - 9:00 PM<br>
-            Saturday: 10:00 AM - 6:00 PM<br>
-            Sunday: Closed</p>
-        </section>
+            <hr class="section-divider">
 
-        <hr>
-
-        <section>
-            <h3>Send Us a Message</h3>
+            <!-- Contact Form -->
+            <h3 style="margin-top: 0; font-size: 1.5rem;">Send Us a Message</h3>
             <form method="POST" action="/contact">
-                <div style="margin-bottom: 20px;">
-                    <label for="name" style="display: block; margin-bottom: 5px;">Name:</label>
-                    <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ccc;">
+                
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" class="modern-input" required placeholder="Enter your name">
                 </div>
-                <div style="margin-bottom: 20px;">
-                    <label for="email" style="display: block; margin-bottom: 5px;">Email:</label>
-                    <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ccc;">
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="modern-input" required placeholder="email@example.com">
                 </div>
-                <div style="margin-bottom: 20px;">
-                    <label for="message" style="display: block; margin-bottom: 5px;">Message:</label>
-                    <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ccc;"></textarea>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" class="modern-input" required placeholder="How can we help you today?"></textarea>
                 </div>
-                <button type="submit" class="cta-button">Send Message</button>
+                
+                <button type="submit" class="cta-button" style="width: 100%; margin-top: 10px;">Send Message</button>
             </form>
         </section>
     </main>
@@ -69,15 +162,15 @@
     </footer>
 
     <script>
-      const header = document.querySelector('header');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 20) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
-        }
-      });
+        // Smooth scrolling for the glass navbar
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
     </script>
-
 </body>
 </html>
