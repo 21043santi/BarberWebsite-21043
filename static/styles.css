@@ -134,7 +134,7 @@ main {
 }
 
 .hero { padding: 100px 20px 80px; }
-.hero1 { padding: 160px 40px 160px; background-position: top; }
+.hero1 { padding: 100px 20px 80px; background-position: top; }
 
 h1 {
   font-size: 3.5rem;
