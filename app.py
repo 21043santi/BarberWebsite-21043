@@ -4,16 +4,13 @@ from datetime import datetime
 import os
 
 app = Flask(__name__)
-# testing the changes
 
-# Database Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'santi-styles-secure-67'
 
 db = SQLAlchemy(app)
 
-# --- MODELS ---
 class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
@@ -34,7 +31,6 @@ class Review(db.Model):
 with app.app_context():
     db.create_all()
 
-# --- ROUTES ---
 @app.route('/')
 def home():
     reviews = Review.query.order_by(Review.created_at.desc()).all()
@@ -49,7 +45,6 @@ def contact():
 @app.route('/booking', methods=['GET', 'POST'])
 def booking():
     if request.method == 'POST':
-        # Takes the JSON data from the Javascript popup logic and saves it
         data = request.json
         new_booking = Booking(
             name=data.get('name'),
@@ -87,7 +82,6 @@ def delete_review(id):
         pass
     return redirect(url_for('home'))
 
-# --- ADMIN DASHBOARD ---
 @app.route('/admin')
 def admin_dashboard():
     bookings = Booking.query.order_by(Booking.id.desc()).all()
