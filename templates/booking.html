@@ -88,19 +88,19 @@
         <section class="booking-glass-panel">
             <form id="appointment-form">
                 <label>Full Name</label>
-                <input type="text" id="cust-name" required placeholder="Enter your name">
+                <input type="text" id="name" required placeholder="Enter your name">
                 <div class="input-row">
                     <div>
                         <label>Email</label>
-                        <input type="email" id="cust-email" required placeholder="email@example.com">
+                        <input type="email" id="email" required placeholder="email@example.com">
                     </div>
                     <div>
                         <label>Phone</label>
-                        <input type="tel" id="cust-phone" required placeholder="64+ 000 0000...">
+                        <input type="tel" id="phone" required placeholder="64+ 000 0000...">
                     </div>
                 </div>
                 <label>Select Service</label>
-                <select id="cust-service" required>
+                <select id="service" required>
                     <option value="" disabled selected>Pick a service</option>
                     <option value="Haircut + Fade ($30)">Haircut + Fade - $30</option>
                     <option value="Haircut + Fade + Design ($35)">Haircut + Fade + Design - $35</option>
@@ -110,11 +110,11 @@
                 <div class="input-row">
                     <div>
                         <label>Date</label>
-                        <input type="date" id="cust-date" required style="color-scheme: dark;">
+                        <input type="date" id="date" required style="color-scheme: dark;">
                     </div>
                     <div>
                         <label>Time Slot</label>
-                        <select id="cust-time" required disabled>
+                        <select id="time" required disabled>
                             <option value="" disabled selected>Select Date</option>
                             <option value="09:00 AM">09:00 AM</option>
                             <option value="09:45 AM">09:45 AM</option>
@@ -152,9 +152,9 @@
     </div>
 
     <script>
-        document.getElementById('cust-date').addEventListener('change', async function(e) {
+        document.getElementById('date').addEventListener('change', async function(e) {
             const dateVal = e.target.value;
-            const timeDropdown = document.getElementById('cust-time');
+            const timeDropdown = document.getElementById('time');
             
             timeDropdown.disabled = false;
             timeDropdown.options[0].text = "Pick a time";
@@ -177,12 +177,12 @@
             e.preventDefault();
             
             const bookingData = {
-                name: document.getElementById('cust-name').value,
-                email: document.getElementById('cust-email').value,
-                phone: document.getElementById('cust-phone').value,
-                service: document.getElementById('cust-service').value,
-                date: document.getElementById('cust-date').value,
-                time: document.getElementById('cust-time').value
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('service').value,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value
             };
 
             const response = await fetch('/booking', {
