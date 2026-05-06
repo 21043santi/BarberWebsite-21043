@@ -176,7 +176,7 @@
         document.getElementById('appointment-form').onsubmit = async function(e) {
             e.preventDefault();
             
-            const bookingData = {
+            const bookingdata = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
@@ -188,12 +188,12 @@
             const response = await fetch('/booking', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(bookingData)
+                body: JSON.stringify(bookingdata)
             });
 
             if (response.ok) {
-                const priceMatch = bookingData.service.match(/\(\$(\d+)\)/);
-                document.getElementById('modal-service-name').innerText = bookingData.service.split(' (')[0];
+                const priceMatch = bookingdata.service.match(/\(\$(\d+)\)/);
+                document.getElementById('modal-service-name').innerText = bookingdata.service.split(' (')[0];
                 document.getElementById('modal-price-val').innerText = priceMatch ? "$" + priceMatch[1] : "TBD";
                 document.getElementById('booking-success-modal').style.display = 'block';
             } else {
