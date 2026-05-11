@@ -2,3 +2,4 @@ Flask
 Flask-SQLAlchemy
 
 C:\"Program Files"\Python311\python.exe .\app.py
+C:\"Program Files"\Python311\Scripts\pip.exe install flask
