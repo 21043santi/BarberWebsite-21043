@@ -204,6 +204,46 @@
           console.error('Error:', error);
         }
       });
+      const slider = document.querySelector('.slider');
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      slider.querySelectorAll('img').forEach(img => {
+        img.addEventListener('dragstart', (e) => e.preventDefault());
+      });
+
+      slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.style.scrollSnapType = 'none';
+        slider.style.scrollBehavior = 'auto'; 
+        slider.style.cursor = 'grabbing';
+        
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+      });
+      slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.style.scrollSnapType = 'x mandatory';
+        slider.style.scrollBehavior = 'smooth';
+        slider.style.cursor = 'grab';
+      });
+
+      slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.style.scrollSnapType = 'x mandatory';
+        slider.style.scrollBehavior = 'smooth';
+        slider.style.cursor = 'grab';
+      });
+      slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return; 
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        slider.scrollLeft = scrollLeft - walk;
+      });
+      
+      slider.style.cursor = 'grab';
     </script>
 </body>
 </html>
