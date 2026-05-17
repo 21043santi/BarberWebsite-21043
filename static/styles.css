@@ -461,6 +461,10 @@ footer {
   display: block;
 }
 
+.accent-blue {
+  color: #00bfff; 
+  text-shadow: 0 0 15px rgba(0, 191, 255, 0.4); 
+}
 .swipe-hint {
   text-align: center;
   color: #64748b;
