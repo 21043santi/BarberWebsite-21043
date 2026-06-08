@@ -80,12 +80,17 @@ def delete_review(id):
         db.session.commit()
     except Exception as e:
         pass
-    return redirect(url_for('home'))
+
+    return redirect(url_for('admin_dashboard'))
 
 @app.route('/admin')
 def admin_dashboard():
+
     bookings = Booking.query.order_by(Booking.id.desc()).all()
-    return render_template('admin.html', bookings=bookings)
+    
+    reviews = Review.query.order_by(Review.created_at.desc()).all()
+    
+    return render_template('admin.html', bookings=bookings, reviews=reviews)
 
 @app.route('/admin/confirm/<int:id>')
 def confirm_booking(id):
