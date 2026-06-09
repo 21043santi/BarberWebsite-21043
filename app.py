@@ -20,6 +20,8 @@ class Booking(db.Model):
     date = db.Column(db.String(50))
     time = db.Column(db.String(50))
     status = db.Column(db.String(20), default='Pending')
+    
+    reviews = db.relationship('Review', backref='booking_owner', lazy=True)
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,6 +29,8 @@ class Review(db.Model):
     rating = db.Column(db.Integer, nullable=False)
     message = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    booking_id = db.Column(db.Integer, db.ForeignKey('booking.id'), nullable=True)
 
 with app.app_context():
     db.create_all()
